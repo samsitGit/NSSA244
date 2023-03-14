@@ -27,20 +27,35 @@ def process_command(command):
         command = int(command)
     except:
         print("Invalid command. Please retry.\n")
+
     if command == 1:
         print("1 - Create a VM")
+        create_VM()
+
     elif command == 2:
         print("2 - List the available VMs")
+        list_VM()
+
     elif command == 3:
         print("3 - Start a VM")
+        start_VM()
+
     elif command == 4:
         print("4 - Stop a VM")
+        stop_VM()
+
     elif command == 5:
         print("5 - List the settings of a particular VM")
+        desc_VM()
+
     elif command == 6:
         print("6 - Delete a VM")
+        dele_VM()
+
     elif command == 7:
         print("7 - End the program")
+        end_program()
+        
     else:
         print("Incorrect command. Please retry.\n")
 
@@ -49,6 +64,7 @@ def create_VM():
     print("Sure, here are a few questions to get started.")
     add_VM("test")
     add_VM("testB")
+    print("VMs added")
 
 #Task 2 helper function on adding VM to RAM
 def add_VM(string):
@@ -90,6 +106,7 @@ def end_program():
     exit()
 
 def main():
-    process_command(text_menu())
+    while True:
+        process_command(text_menu())
 
 main()

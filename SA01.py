@@ -8,7 +8,7 @@ VM_LIST = []
 #Task 1
 def text_menu():
     #Print list of options
-    print("Enter your option (1-7)")
+    print("\nEnter your option (1-7)")
     print("\t1. Create a VM")
     print("\t2. List the available VMs")
     print("\t3. Start a VM")
@@ -25,39 +25,38 @@ def text_menu():
 def process_command(command):
     try:
         command = int(command)
+
+        if command == 1:
+            print("1 - Create a VM")
+            create_VM()
+
+        elif command == 2:
+            print("2 - List the available VMs")
+            list_VM()
+
+        elif command == 3:
+            print("3 - Start a VM")
+            start_VM()
+
+        elif command == 4:
+            print("4 - Stop a VM")
+            stop_VM()
+
+        elif command == 5:
+            print("5 - List the settings of a particular VM")
+            desc_VM()
+
+        elif command == 6:
+            print("6 - Delete a VM")
+            dele_VM()
+    
     except:
-        print("Invalid command. Please retry.\n")
+        print("Invalid command. Please retry.")
 
-    if command == 1:
-        print("1 - Create a VM")
-        create_VM()
-
-    elif command == 2:
-        print("2 - List the available VMs")
-        list_VM()
-
-    elif command == 3:
-        print("3 - Start a VM")
-        start_VM()
-
-    elif command == 4:
-        print("4 - Stop a VM")
-        stop_VM()
-
-    elif command == 5:
-        print("5 - List the settings of a particular VM")
-        desc_VM()
-
-    elif command == 6:
-        print("6 - Delete a VM")
-        dele_VM()
-
-    elif command == 7:
+    if command == 7:
         print("7 - End the program")
         end_program()
-        
-    else:
-        print("Incorrect command. Please retry.\n")
+
 
 #Task 2.1 - creating and configuring the VM
 def create_VM():
@@ -80,25 +79,25 @@ def list_VM():
 #Task 2.3 - starting a VM
 def start_VM():
     list_VM()
-    start_VM_index = input(">> ")
+    start_VM_index = int(input(">> "))-1
     VM_LIST[start_VM_index] = "started"
 
 #Task 2.4 - stopping a VM
 def stop_VM():
     list_VM()
-    start_VM_index = input(">> ")
+    start_VM_index = int(input(">> "))-1
     VM_LIST[start_VM_index] = "stopped"
 
 #Task 2.5 - listing the settings of a VM
 def desc_VM():
     list_VM()
-    start_VM_index = input(">> ")
+    start_VM_index = int(input(">> "))-1
     VM_LIST[start_VM_index] = "desc'd"
 
 #Task 2.6 - deleting a VM
 def dele_VM():
     list_VM()
-    start_VM_index = input(">> ")
+    start_VM_index = int(input(">> "))-1
     VM_LIST[start_VM_index] = "deleted"
 
 #Task 2.7 - end the program

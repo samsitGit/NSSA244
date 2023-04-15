@@ -116,11 +116,17 @@ function Start-VM {
     # Get the name of the selected VM
     $VMName = $vms[$selectedVM - 1]
 
-    # Start the selected VM
-    Write-Host "Starting VM: $VMName"
-    Start-VM -Name $VMName
-    Write-Host "VM $VMName has been started."
+    try {
+        # Start the selected VM
+        Write-Host "Starting VM: $VMName"
+        Start-VM -Name $VMName
+        Write-Host "VM '$VMName' has been started."
+    } catch {
+        # Catch and print any errors that occur
+        Write-Host "Failed to start VM '$VMName'. Error: $_" -ForegroundColor Red
+    }
 }
+
 
 # Task 2.4 - stopping a VM
 function Stop-VM {

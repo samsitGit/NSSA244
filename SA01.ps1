@@ -43,7 +43,7 @@ function Process-Command($command) {
     }
     elseif ($command -eq 4) {
         Write-Host "4 - Stop a VM"
-        Stop-VM
+        StopVMFunc
     }
     elseif ($command -eq 5) {
         Write-Host "5 - List the settings of a particular VM"
@@ -61,8 +61,10 @@ function Process-Command($command) {
 
 # Task 2.1 - creating and configuring the VM
 function Create-VM {
+    # Prompt the user to enter a name for the VM
     $VMName = Read-Host "Enter a name for the VM"
     
+    # Define the VM properties using a hashtable
     $VM = @{
         Name = $VMName
         MemoryStartupBytes = 2147483648
@@ -74,10 +76,13 @@ function Create-VM {
         SwitchName = (Get-VMSwitch).Name
     }
     
+    # Create the VM using the New-VM cmdlet and pass the hashtable as parameters
     New-VM @VM
 
+    # Display a confirmation message with the name of the created VM
     Write-Host "VM $VMName has been created."
 }
+
 
 
 # Task 2.2 - listing all the VMs
@@ -99,7 +104,7 @@ function List-VM {
 function StartVMFunc {
     param()
 
-    # Call the List-VM function to get a list of available VMs
+    # Call the Get-VM function to get a list of available VMs
     $vms = Get-VM
 
     # Prompt the user to select a VM to start
@@ -129,9 +134,35 @@ function StartVMFunc {
 
 
 # Task 2.4 - stopping a VM
-function Stop-VM {
-    List-VM
+function StopVMFunc {
+    param()
 
+    # Call the Get-VM function to get a list of available VMs
+    $vms = Get-VM
+
+    # Prompt the user to select a VM to stop
+    Write-Host "Select a virtual machine to stop:"
+    $index = 1
+    $vms | ForEach-Object {
+        Write-Host "$index. $_"
+        $index++
+    }
+
+    $selectedVM = Read-Host "Enter the number of the VM to stop"
+
+    # Get the name of the selected VM
+    $selectedVMInfo = $vms[$selectedVM - 1]
+    $VMName = $selectedVMInfo.Name
+
+    try {
+        # Stop the selected VM
+        Write-Host "Stopping VM: $VMName"
+        Stop-VM -Name $VMName
+        Write-Host "VM '$VMName' has been stopped."
+    } catch {
+        # Catch and print any errors that occur
+        Write-Host "Failed to stop VM '$VMName'. Error: $_" -ForegroundColor Red
+    }
 }
 
 # Task 2.5 - listing the settings of a VM

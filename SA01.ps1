@@ -69,6 +69,7 @@ function Create-VM {
 # Task 2.2 - listing all the VMs
 function List-VM {
     Write-Host "Listed VMs"
+    Get-VM
 }
 
 # Task 2.3 - starting a VM

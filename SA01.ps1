@@ -83,16 +83,43 @@ function Create-VM {
 
 # Task 2.2 - listing all the VMs
 function List-VM {
+    param()
+
+    # Get a list of VMs
     $vms = Get-VM
-    Write-Host "List of VMs:"
-    foreach ($vm in $vms) {
-        Write-Host "- $($vm.Name)"
+
+    # Display the list of VMs with a number prefix
+    $index = 1
+    $vms | ForEach-Object {
+        Write-Host "$index. $_"
+        $index++
     }
 }
 
 # Task 2.3 - starting a VM
 function Start-VM {
-    List-VM
+    param()
+
+    # Call the List-VM function to get a list of available VMs
+    $vms = List-VM
+
+    # Prompt the user to select a VM to start
+    Write-Host "Select a virtual machine to start:"
+    $index = 1
+    $vms | ForEach-Object {
+        Write-Host "$index. $_"
+        $index++
+    }
+
+    $selectedVM = Read-Host "Enter the number of the VM to start"
+
+    # Get the name of the selected VM
+    $VMName = $vms[$selectedVM - 1]
+
+    # Start the selected VM
+    Write-Host "Starting VM: $VMName"
+    Start-VM -Name $VMName
+    Write-Host "VM $VMName has been started."
 }
 
 # Task 2.4 - stopping a VM

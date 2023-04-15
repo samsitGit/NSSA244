@@ -2,7 +2,7 @@
     NSSA 244 Script Assignment 1
     Author: Sam Sit
 '''
-
+import virtualbox
 VM_LIST = []
 
 #Task 1
@@ -71,10 +71,9 @@ def add_VM(string):
 
 #Task 2.2 - listing all the VM
 def list_VM():
-    count = 1
-    for i in VM_LIST:
-        print(count, i)
-        count += 1
+    vbox = virtualbox.VirtualBox()
+    for m in vbox.machines:
+        print(m.name)
 
 #Task 2.3 - starting a VM
 def start_VM():

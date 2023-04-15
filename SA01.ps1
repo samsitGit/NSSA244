@@ -39,7 +39,7 @@ function Process-Command($command) {
     }
     elseif ($command -eq 3) {
         Write-Host "3 - Start a VM"
-        Start-VM
+        StartVMFunc
     }
     elseif ($command -eq 4) {
         Write-Host "4 - Stop a VM"
@@ -96,7 +96,7 @@ function List-VM {
 }
 
 # Task 2.3 - starting a VM
-function Start-VM {
+function StartVMFunc {
     param()
 
     # Call the List-VM function to get a list of available VMs

@@ -100,7 +100,7 @@ function Start-VM {
     param()
 
     # Call the List-VM function to get a list of available VMs
-    $vms = List-VM
+    $vms = Get-VM
 
     # Prompt the user to select a VM to start
     Write-Host "Select a virtual machine to start:"

@@ -31,11 +31,11 @@ function Process-Command($command) {
 
     if ($command -eq 1) {
         Write-Host "1 - Create a VM"
-        Create-VM
+        CreateVMFunc
     }
     elseif ($command -eq 2) {
         Write-Host "2 - List the available VMs"
-        List-VM
+        ListVMFunc
     }
     elseif ($command -eq 3) {
         Write-Host "3 - Start a VM"
@@ -47,11 +47,11 @@ function Process-Command($command) {
     }
     elseif ($command -eq 5) {
         Write-Host "5 - List the settings of a particular VM"
-        Describe-VM
+        DescribeVMFunc
     }
     elseif ($command -eq 6) {
         Write-Host "6 - Delete a VM"
-        Delete-VM
+        DeleteVMFunc
     }
     elseif ($command -eq 7) {
         Write-Host "7 - End the program"
@@ -60,7 +60,7 @@ function Process-Command($command) {
 }
 
 # Task 2.1 - creating and configuring the VM
-function Create-VM {
+function CreateVMFunc {
     # Prompt the user to enter a name for the VM
     $VMName = Read-Host "Enter a name for the VM"
     
@@ -86,7 +86,7 @@ function Create-VM {
 
 
 # Task 2.2 - listing all the VMs
-function List-VM {
+function ListVMFunc {
     param()
 
     # Call the Get-VM function to get a list of available VMs
@@ -168,7 +168,7 @@ function StopVMFunc {
 }
 
 # Task 2.5 - listing the settings of a VM
-function Describe-VM {
+function DescribeVMFunc {
     param()
 
     # Call the Get-VM function to get a list of available VMs
@@ -202,10 +202,38 @@ function Describe-VM {
 
 
 # Task 2.6 - deleting a VM
-function Delete-VM {
-    List-VM
+function DeleteVMFunc {
+    param()
 
+    # Call the Get-VM function to get a list of available VMs
+    $vms = Get-VM
+
+    # Prompt the user to select a VM to delete
+    Write-Host "Select a virtual machine to delete:"
+    $index = 1
+    $vms | ForEach-Object {
+        Write-Host "$index. $($_.Name)"
+        $index++
+    }
+
+    $selectedVM = Read-Host "Enter the number of the VM to delete"
+
+    # Get the name of the selected VM
+    $selectedVMInfo = $vms[$selectedVM - 1]
+    $VMName = $selectedVMInfo.Name
+
+    try {
+        # Delete the selected VM
+        Write-Host "Deleting VM: $VMName"
+        Remove-VM -Name $VMName -Force
+        Write-Host "VM '$VMName' is deleted."
+    }
+    catch {
+        # Catch and print any errors that occur
+        Write-Host "Failed to delete VM '$VMName'. Error: $_" -ForegroundColor Red
+    }
 }
+
 
 # Task 2.7 - end the program
 function End-Program {

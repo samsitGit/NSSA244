@@ -191,7 +191,7 @@ function Describe-VM {
     try {
         # Get the virtual hardware configuration settings of the selected VM
         Write-Host "Getting settings for VM: $VMName"
-        $vmSettings = Get-VMHardware -VMName $VMName
+        $vmSettings = $selectedVMInfo.HardwareProfile
         $settings = @{
             Name = $VMName
             Generation = $vmSettings.Generation

@@ -191,7 +191,17 @@ function Describe-VM {
     try {
         # Get the settings of the selected VM
         Write-Host "Getting settings for VM: $VMName"
-        $settings = Get-VM -Name $VMName | Select-Object -Property Name, Generation, MemoryStartupBytes, NewVHDPath, NewVHDSizeBytes, BootDevice, Path, SwitchName
+        $settings = @{
+            Name = $vm.Name
+            Generation = $vm.Generation
+            MemoryStartupBytes = $vm.VMObject.MemoryStartupBytes
+            NewVHDPath = $vm.VMObject.HardDrives.HardDrive.VHD.Path
+            NewVHDSizeBytes = $vm.VMObject.HardDrives.HardDrive.VHD.Size
+            BootDevice = $vm.VMObject.Hardware.Bios.BootMenu.DisplayBootMenu.On
+            Path = $vm.Path
+            SwitchName = $vm.SwitchName
+        }
+        $settings
 
     }
     catch {

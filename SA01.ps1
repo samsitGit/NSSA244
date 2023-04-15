@@ -89,11 +89,14 @@ function Create-VM {
 function List-VM {
     param()
 
-    # Get a list of VMs
+    # Call the Get-VM function to get a list of available VMs
     $vms = Get-VM
 
-    # Display the list of VMs with a number prefix
-    $vms | Format-Table Name, State, Status, CPUUsage, MemoryAssigned, Uptime, IntegrationServicesState -AutoSize
+    $index = 1
+    $vms | ForEach-Object {
+        Write-Host "$index. $($_.Name)"
+        $index++
+    }
 
 }
 
@@ -108,7 +111,7 @@ function StartVMFunc {
     Write-Host "Select a virtual machine to start:"
     $index = 1
     $vms | ForEach-Object {
-        Write-Host "$index. $_"
+        Write-Host "$index. $($_.Name)"
         $index++
     }
 
@@ -142,7 +145,7 @@ function StopVMFunc {
     Write-Host "Select a virtual machine to stop:"
     $index = 1
     $vms | ForEach-Object {
-        Write-Host "$index. $_"
+        Write-Host "$index. $($_.Name)"
         $index++
     }
 
@@ -175,7 +178,7 @@ function Describe-VM {
     Write-Host "Select a virtual machine to get the settings:"
     $index = 1
     $vms | ForEach-Object {
-        Write-Host "$index. $_"
+        Write-Host "$index. $($_.Name)"
         $index++
     }
 
@@ -187,19 +190,8 @@ function Describe-VM {
 
     try {
         # Get the virtual hardware configuration settings of the selected VM
-        Write-Host "Getting settings for VM: $VMName"
-        $vmSettings = $selectedVMInfo.HardwareProfile
-        $settings = @{
-            Name = $VMName
-            Generation = $vmSettings.Generation
-            MemoryStartupBytes = $vmSettings.MemoryStartupBytes
-            NewVHDPath = $vmSettings.NewVHDPath
-            NewVHDSizeBytes = $vmSettings.NewVHDSizeBytes
-            BootDevice = $vmSettings.BootDevice
-            Path = $vmSettings.Path
-            SwitchName = $vmSettings.SwitchName
-        }
-        $settings
+        $vm = Get-VM -Name $VMName
+        $vm | Format-Table Name, State, CPUUsage, MemoryAssigned, Uptime, Status, Version -AutoSize
 
     }
     catch {

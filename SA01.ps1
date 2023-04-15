@@ -126,7 +126,8 @@ function StartVMFunc {
         Write-Host "Starting VM: $VMName"
         Start-VM -Name $VMName
         Write-Host "VM '$VMName' is started."
-    } catch {
+    }
+    catch {
         # Catch and print any errors that occur
         Write-Host "Failed to start VM '$VMName'. Error: $_" -ForegroundColor Red
     }
@@ -159,7 +160,8 @@ function StopVMFunc {
         Write-Host "Stopping VM: $VMName"
         Stop-VM -Name $VMName
         Write-Host "VM '$VMName' is stopped."
-    } catch {
+    }
+    catch {
         # Catch and print any errors that occur
         Write-Host "Failed to stop VM '$VMName'. Error: $_" -ForegroundColor Red
     }
@@ -176,7 +178,7 @@ function Describe-VM {
     Write-Host "Select a virtual machine to get the settings:"
     $index = 1
     $vms | ForEach-Object {
-        Write-Host "$index. $($_.Name)"
+        Write-Host "$index. $_"
         $index++
     }
 
@@ -190,8 +192,9 @@ function Describe-VM {
         # Get the settings of the selected VM
         Write-Host "Getting settings for VM: $VMName"
         $settings = Get-VM -Name $VMName | Select-Object -Property Name, Generation, MemoryStartupBytes, NewVHDPath, NewVHDSizeBytes, BootDevice, Path, SwitchName
-        $settings
-    } catch {
+
+    }
+    catch {
         # Catch and print any errors that occur
         Write-Host "Failed to get settings for VM '$VMName'. Error: $_" -ForegroundColor Red
     }

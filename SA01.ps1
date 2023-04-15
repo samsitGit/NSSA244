@@ -63,14 +63,7 @@ function Process-Command($command) {
 # Task 2.1 - creating and configuring the VM
 function Create-VM {
     Write-Host "Sure, here are a few questions to get started."
-    Add-VM "test"
-    Add-VM "testB"
     Write-Host "VMs added"
-}
-
-# Task 2 helper function on adding VM to RAM
-function Add-VM($string) {
-    $global:VM_LIST += $string
 }
 
 # Task 2.2 - listing all the VMs
@@ -81,29 +74,24 @@ function List-VM {
 # Task 2.3 - starting a VM
 function Start-VM {
     List-VM
-    $start_VM_index = [int](Read-Host ">> ")-1
-    $global:VM_LIST[$start_VM_index] = "started"
 }
 
 # Task 2.4 - stopping a VM
 function Stop-VM {
     List-VM
-    $stop_VM_index = [int](Read-Host ">> ")-1
-    $global:VM_LIST[$stop_VM_index] = "stopped"
+
 }
 
 # Task 2.5 - listing the settings of a VM
 function Describe-VM {
     List-VM
-    $desc_VM_index = [int](Read-Host ">> ")-1
-    $global:VM_LIST[$desc_VM_index] = "desc'd"
+
 }
 
 # Task 2.6 - deleting a VM
 function Delete-VM {
     List-VM
-    $delete_VM_index = [int](Read-Host ">> ")-1
-    $global:VM_LIST[$delete_VM_index] = "deleted"
+
 }
 
 # Task 2.7 - end the program

@@ -24,37 +24,36 @@ function Show-Menu {
 function Process-Command($command) {
     try {
         $command = [int]$command
-
-        if ($command -eq 1) {
-            Write-Host "1 - Create a VM"
-            Create-VM
-        }
-        elseif ($command -eq 2) {
-            Write-Host "2 - List the available VMs"
-            List-VM
-        }
-        elseif ($command -eq 3) {
-            Write-Host "3 - Start a VM"
-            Start-VM
-        }
-        elseif ($command -eq 4) {
-            Write-Host "4 - Stop a VM"
-            Stop-VM
-        }
-        elseif ($command -eq 5) {
-            Write-Host "5 - List the settings of a particular VM"
-            Describe-VM
-        }
-        elseif ($command -eq 6) {
-            Write-Host "6 - Delete a VM"
-            Delete-VM
-        }
     }
     catch {
         Write-Host "Invalid command. Please retry."
     }
 
-    if ($command -eq 7) {
+    if ($command -eq 1) {
+        Write-Host "1 - Create a VM"
+        Create-VM
+    }
+    elseif ($command -eq 2) {
+        Write-Host "2 - List the available VMs"
+        List-VM
+    }
+    elseif ($command -eq 3) {
+        Write-Host "3 - Start a VM"
+        Start-VM
+    }
+    elseif ($command -eq 4) {
+        Write-Host "4 - Stop a VM"
+        Stop-VM
+    }
+    elseif ($command -eq 5) {
+        Write-Host "5 - List the settings of a particular VM"
+        Describe-VM
+    }
+    elseif ($command -eq 6) {
+        Write-Host "6 - Delete a VM"
+        Delete-VM
+    }
+    elseif ($command -eq 7) {
         Write-Host "7 - End the program"
         End-Program
     }

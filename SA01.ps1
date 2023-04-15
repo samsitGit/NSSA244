@@ -93,11 +93,8 @@ function List-VM {
     $vms = Get-VM
 
     # Display the list of VMs with a number prefix
-    $index = 1
-    $vms | ForEach-Object {
-        Write-Host "$index. $_"
-        $index++
-    }
+    $vm | Format-Table Name, State, Status, CPUUsage, MemoryAssigned, Uptime, IntegrationServicesState -AutoSize
+
 }
 
 # Task 2.3 - starting a VM

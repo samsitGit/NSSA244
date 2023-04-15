@@ -114,6 +114,7 @@ function StartVMFunc {
 
     # Get the name of the selected VM
     $VMName = $vms[$selectedVM - 1]
+    $VMName = $selectedVMInfo.Name
 
     try {
         # Start the selected VM

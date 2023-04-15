@@ -125,7 +125,7 @@ function StartVMFunc {
         # Start the selected VM
         Write-Host "Starting VM: $VMName"
         Start-VM -Name $VMName
-        Write-Host "VM '$VMName' has been started."
+        Write-Host "VM '$VMName' is started."
     } catch {
         # Catch and print any errors that occur
         Write-Host "Failed to start VM '$VMName'. Error: $_" -ForegroundColor Red
@@ -158,7 +158,7 @@ function StopVMFunc {
         # Stop the selected VM
         Write-Host "Stopping VM: $VMName"
         Stop-VM -Name $VMName
-        Write-Host "VM '$VMName' has been stopped."
+        Write-Host "VM '$VMName' is stopped."
     } catch {
         # Catch and print any errors that occur
         Write-Host "Failed to stop VM '$VMName'. Error: $_" -ForegroundColor Red
@@ -167,9 +167,36 @@ function StopVMFunc {
 
 # Task 2.5 - listing the settings of a VM
 function Describe-VM {
-    List-VM
+    param()
 
+    # Call the Get-VM function to get a list of available VMs
+    $vms = Get-VM
+
+    # Prompt the user to select a VM to get the settings
+    Write-Host "Select a virtual machine to get the settings:"
+    $index = 1
+    $vms | ForEach-Object {
+        Write-Host "$index. $($_.Name)"
+        $index++
+    }
+
+    $selectedVM = Read-Host "Enter the number of the VM to get the settings"
+
+    # Get the name of the selected VM
+    $selectedVMInfo = $vms[$selectedVM - 1]
+    $VMName = $selectedVMInfo.Name
+
+    try {
+        # Get the settings of the selected VM
+        Write-Host "Getting settings for VM: $VMName"
+        $settings = Get-VM -Name $VMName | Select-Object -Property Name, Generation, MemoryStartupBytes, NewVHDPath, NewVHDSizeBytes, BootDevice, Path, SwitchName
+        $settings
+    } catch {
+        # Catch and print any errors that occur
+        Write-Host "Failed to get settings for VM '$VMName'. Error: $_" -ForegroundColor Red
+    }
 }
+
 
 # Task 2.6 - deleting a VM
 function Delete-VM {

@@ -93,7 +93,7 @@ function List-VM {
     $vms = Get-VM
 
     # Display the list of VMs with a number prefix
-    $vm | Format-Table Name, State, Status, CPUUsage, MemoryAssigned, Uptime, IntegrationServicesState -AutoSize
+    $vms | Format-Table Name, State, Status, CPUUsage, MemoryAssigned, Uptime, IntegrationServicesState -AutoSize
 
 }
 

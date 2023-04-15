@@ -1,6 +1,13 @@
 '''
     NSSA 244 Script Assignment 1
     Author: Sam Sit
+
+    Make sure you are using Windows 10 with Hyper-V set up with the following command:
+    Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+
+    Run the following command to run the script if your computer does not allow scripts:
+    powershell -ExecutionPolicy Bypass -File SA01.ps1
+
 '''
 
 # Task 1

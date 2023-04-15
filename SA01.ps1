@@ -76,13 +76,18 @@ function Create-VM {
     }
     
     New-VM @VM
+
+    Write-Host "VM $VMName has been created."
 }
 
 
 # Task 2.2 - listing all the VMs
 function List-VM {
-    Write-Host "Listed VMs"
-    Get-VM
+    $vms = Get-VM
+    Write-Host "List of VMs:"
+    foreach ($vm in $vms) {
+        Write-Host "- $($vm.Name)"
+    }
 }
 
 # Task 2.3 - starting a VM

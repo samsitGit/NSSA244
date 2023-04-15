@@ -113,7 +113,7 @@ function StartVMFunc {
     $selectedVM = Read-Host "Enter the number of the VM to start"
 
     # Get the name of the selected VM
-    $VMName = $vms[$selectedVM - 1]
+    $selectedVMInfo = $vms[$selectedVM - 1]
     $VMName = $selectedVMInfo.Name
 
     try {

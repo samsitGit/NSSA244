@@ -191,7 +191,7 @@ function DescribeVMFunc {
     try {
         # Get the virtual hardware configuration settings of the selected VM
         $vm = Get-VM -Name $VMName
-        $vm | Format-Table Name, State, CPUUsage, MemoryAssigned, Uptime, Status, Version -AutoSize
+        $vm
 
     }
     catch {

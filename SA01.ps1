@@ -191,16 +191,16 @@ function Describe-VM {
     try {
         # Get the virtual hardware configuration settings of the selected VM
         Write-Host "Getting settings for VM: $VMName"
-        $vm = Get-VM -Name $VMName
+        $vmSettings = Get-VMHardware -VMName $VMName
         $settings = @{
-            Name = $vm.Name
-            Generation = $vm.Generation
-            MemoryStartupBytes = $vm.VMObject.MemoryStartupBytes
-            NewVHDPath = $vm.VMObject.HardDrives.HardDrive.VHD.Path
-            NewVHDSizeBytes = $vm.VMObject.HardDrives.HardDrive.VHD.Size
-            BootDevice = $vm.VMObject.Hardware.Bios.BootMenu.DisplayBootMenu.On
-            Path = $vm.Path
-            SwitchName = $vm.SwitchName
+            Name = $VMName
+            Generation = $vmSettings.Generation
+            MemoryStartupBytes = $vmSettings.MemoryStartupBytes
+            NewVHDPath = $vmSettings.NewVHDPath
+            NewVHDSizeBytes = $vmSettings.NewVHDSizeBytes
+            BootDevice = $vmSettings.BootDevice
+            Path = $vmSettings.Path
+            SwitchName = $vmSettings.SwitchName
         }
         $settings
 
